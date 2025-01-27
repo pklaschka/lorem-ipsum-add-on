@@ -1,0 +1,37 @@
+{
+  "name": "de.zuriklaschka.express.lorem-ipsum", 
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --mode staging && run-p devmain ccweb",
+    "build": "vite build --mode build",
+    "serve": "ccweb-add-on-scripts start --analytics off --use \"vite build --mode build\" --src=dummy",
+    "ccweb": "ccweb-add-on-scripts start --analytics off --src=\".tmp\"",
+    "cert": "npx @adobe/ccweb-add-on-ssl setup --hostname localhost",
+    "devmain": "cross-env MODE=dev vite --mode dev",
+    "devcode": "vite build --watch --mode dev --config vite.config.code.ts",
+    "buildcode": "vite build --config vite.config.code.ts",
+    "zip": "cross-env MODE=zip vite build"
+  },
+  "devDependencies": {
+    "@adobe/ccweb-add-on-scripts": "^2.4.1",
+    "@adobe/ccweb-add-on-sdk-types": "^1.9.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "parallel": "^1.2.0",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.8",
+    "vite-plugin-mkcert": "^1.17.6",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite-express-plugin": "^0.0.17",
+    "sass": "^1.79.4"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
