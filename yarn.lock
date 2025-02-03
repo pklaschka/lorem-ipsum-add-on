@@ -94,12 +94,11 @@
     tslib "2.6.2"
     ws "8.9.0"
 
-"@adobe/ccweb-add-on-sdk-types@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.npmjs.org/@adobe/ccweb-add-on-sdk-types/-/ccweb-add-on-sdk-types-1.9.1.tgz"
-  integrity sha512-ZWqFVT7c66akIYAEbtTBfw20lN7fUfE/P+pO1zM0lxhCKbMrBF0TBLMgFkkevki7rA2jqW6NCeVv+fGq0pemRg==
+"@adobe/ccweb-add-on-sdk-types@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.npmjs.org/@adobe/ccweb-add-on-sdk-types/-/ccweb-add-on-sdk-types-1.11.0.tgz"
+  integrity sha512-ARwoGBuXW8Di6AjELRSdmjrkffews+S1asHadSP05vnO/I73XA7ajkMYVGMsXykY8rmxqVMmWA6QKxwzPdbO0A==
   dependencies:
-    "@swc/helpers" "0.5.12"
     gl-matrix "3.3.0"
     tslib "2.6.2"
 
@@ -1795,6 +1794,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
+
+fsevents@~2.3.2, fsevents@~2.3.3:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.2:
   version "1.1.2"
