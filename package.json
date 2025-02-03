@@ -1,5 +1,5 @@
 {
-  "name": "de.zuriklaschka.express.lorem-ipsum", 
+  "name": "de.zuriklaschka.express.lorem-ipsum",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -19,18 +19,22 @@
     "@adobe/ccweb-add-on-sdk-types": "^1.11.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
     "parallel": "^1.2.0",
+    "sass": "^1.79.4",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3",
     "vite": "^5.4.8",
-    "vite-plugin-mkcert": "^1.17.6",
-    "@vitejs/plugin-react": "^4.3.1",
     "vite-express-plugin": "^0.0.17",
-    "sass": "^1.79.4"
+    "vite-plugin-mkcert": "^1.17.6"
   },
   "dependencies": {
+    "@adobe/react-spectrum": "^3.39.0",
+    "@react-spectrum/theme-express": "^3.0.0-alpha.17",
+    "@react-spectrum/toast": "^3.0.0-beta.18",
+    "@spectrum-icons/express": "^3.0.0-alpha.22",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }
