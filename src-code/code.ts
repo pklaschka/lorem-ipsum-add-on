@@ -1,12 +1,50 @@
 import addOnSandboxSdk from "add-on-sdk-document-sandbox";
 
-import { editor, TextNode, Node, constants } from "express-document-sdk";
+import { constants, editor, Node, TextNode } from "express-document-sdk";
 
 const { runtime } = addOnSandboxSdk.instance;
+
+import * as feedback from "../src/feedback";
+import {
+  generatePlaceholderText,
+  LoremIpsumOptions,
+} from "./placeholder-text/get-placeholder-text";
+import { insertPlaceholderTextToAutoHeightTextNode } from "./placeholder-text/auto-height-text";
+
+export type FeedbackKey = keyof typeof feedback;
 
 console.log("Sandbox code is running nowww");
 
 const sandboxApi = {
+  insertPlaceholderText(
+    loremIpsumOptions: LoremIpsumOptions,
+  ): FeedbackKey {
+    const { pointTextNodes, autoHeightTextNodes } = getTextNodesByType();
+
+    if (pointTextNodes.length + autoHeightTextNodes.length === 0) {
+      return "noTextNodes";
+    }
+
+    for (const pointTextNode of pointTextNodes) {
+      pointTextNode.fullContent.text = generatePlaceholderText(
+        2,
+        loremIpsumOptions,
+      );
+    }
+
+    for (const autoHeightNode of autoHeightTextNodes) {
+      insertPlaceholderTextToAutoHeightTextNode(
+        autoHeightNode,
+        loremIpsumOptions,
+      );
+    }
+
+    if (pointTextNodes.length > 0) {
+      return "containsPointText";
+    }
+
+    return "success";
+  },
   determineTextNodeType() {
     const selection = editor.context.selection.filter(isTextNode);
     if (selection.length === 0) {
@@ -19,6 +57,27 @@ const sandboxApi = {
 };
 
 export type SandboxRemoteType = typeof sandboxApi;
+
+/**
+ * Categorizes the selection and returns arrays of point text nodes and
+ * auto height text nodes
+ * @returns an object with two arrays of text nodes, one for point text
+ * nodes and one for auto height text nodes.
+ */
+function getTextNodesByType() {
+  const selection = editor.context.selection.filter(isTextNode);
+  let pointTextNodes: TextNode[] = [];
+  let autoHeightTextNodes: TextNode[] = [];
+
+  for (const node of selection) {
+    if (isLikePointText(node)) {
+      pointTextNodes.push(node);
+    } else {
+      autoHeightTextNodes.push(node);
+    }
+  }
+  return { pointTextNodes, autoHeightTextNodes };
+}
 
 /**
  * Determines if the passed node is a `TextNode`

@@ -13,6 +13,14 @@ import {
 } from "@adobe/react-spectrum";
 import { theme as expressTheme } from "@react-spectrum/theme-express";
 import { ToastContainer, ToastQueue } from "@react-spectrum/toast";
+import {
+  DEFAULT_PLACEHOLDER_TEXT,
+  PlaceholderTextPicker,
+} from "./components/placeholder-text-picker";
+
+import * as feedback from "./feedback";
+import type { FeedbackKey } from "../src-code/code";
+import { LoremIpsumOptions } from "../src-code/placeholder-text/get-placeholder-text";
 
 let closeFunction = () => {};
 
@@ -24,7 +32,22 @@ export const App = () => {
     // setTextType("Hello World");
   }
 
-  useEffect(() => {}, []);
+  const [text, setText] = useState(DEFAULT_PLACEHOLDER_TEXT);
+  const [punctuation, setPunctuation] = useState("");
+  const [includeLineBreaks, setIncludeLineBreaks] = useState(false);
+
+  async function onInsertPlaceholderText() {
+    const runtime = await getRuntime();
+    const result = await runtime.insertPlaceholderText(
+      {
+        text,
+        punctuation,
+        includeLineBreaks,
+      } satisfies LoremIpsumOptions,
+    );
+    feedback[result]();
+  }
+
   return (
     <>
       <Provider theme={expressTheme} colorScheme="light" scale="medium">
@@ -34,21 +57,26 @@ export const App = () => {
             Fills selected text element(s) with placeholder text.
           </Text>
           <Flex direction="column" gap="size-200">
-            <Picker label="Placeholder Text" width={"100%"} selectedKey={"1"}>
-              <Item key="1">Words</Item>
-              <Item key="2">Sentences</Item>
-            </Picker>
+            <PlaceholderTextPicker text={text} setText={setText} />
             <Picker
               label="End with punctuation mark"
               width={"100%"}
-              selectedKey={"1"}
+              selectedKey={punctuation}
+              onSelectionChange={(value) => {
+                setPunctuation("" + value);
+              }}
             >
-              <Item key="1">None</Item>
-              <Item key="2">Period ('.')</Item>
-              <Item key="3">Question mark ('?')</Item>
-              <Item key="4">Exclamation mark ('!')</Item>
+              <Item key="">None</Item>
+              <Item key=".">Period ('.')</Item>
+              <Item key="?">Question mark ('?')</Item>
+              <Item key="!">Exclamation mark ('!')</Item>
             </Picker>
-            <Checkbox>Include line breaks</Checkbox>
+            <Checkbox
+              isSelected={includeLineBreaks}
+              onChange={setIncludeLineBreaks}
+            >
+              Include line breaks
+            </Checkbox>
           </Flex>
           <Flex
             direction="row"
@@ -56,21 +84,7 @@ export const App = () => {
             justifyContent={"end"}
             marginY={"size-200"}
           >
-            <Button
-              variant="cta"
-              onPress={() => {
-                ToastQueue.positive("Placeholder text inserted.", {
-                  timeout: 2600,
-                });
-                // ToastQueue.negative("No text nodes were selected.", {
-                //   timeout: 3200,
-                // });
-                // closeFunction();
-                // closeFunction = ToastQueue.neutral(
-                //   "Point text selected If your selected layer is a point text layer, the plugin cannot ascertain its height. Therefore, we will produce two words appropriate for links or buttons. To obtain additional words, please choose a text layer with a defined height.",
-                // );
-              }}
-            >
+            <Button variant="cta" onPress={onInsertPlaceholderText}>
               Insert Placeholder Text
             </Button>
           </Flex>
