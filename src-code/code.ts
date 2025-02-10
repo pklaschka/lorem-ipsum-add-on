@@ -96,12 +96,12 @@ function isTextNode(node: Node): node is TextNode {
  * @returns `true` if the text node is like a point text, `false` otherwise
  */
 function isLikePointText(textNode: TextNode) {
-  const prevHeight = textNode.boundsInParent.height;
+  const prevHeight = textNode.boundsLocal.height;
   const prevText = textNode.fullContent.text;
 
   textNode.fullContent.text = "fjo23qj9o23jro23jfo23jfo23jfo23f".repeat(10);
 
-  const newHeight = textNode.boundsInParent.height;
+  const newHeight = textNode.boundsLocal.height;
 
   let changedWidthAtSomePoint = doesWidthChangeWithText(textNode);
 
@@ -123,11 +123,11 @@ function isLikePointText(textNode: TextNode) {
  * @returns `true` if the width changes with text, `false` otherwise
  */
 function doesWidthChangeWithText(textNode: TextNode, maxIterations = 10) {
-  const prevWidth = textNode.boundsInParent.width;
+  const prevWidth = textNode.boundsLocal.width;
 
   for (let i = 0; i < maxIterations; i++) {
     textNode.fullContent.text += " fjo23qj9o23jro23jfo23 jfo23jfo23f";
-    if (textNode.boundsInParent.width !== prevWidth) {
+    if (textNode.boundsLocal.width !== prevWidth) {
       return true;
     }
   }
