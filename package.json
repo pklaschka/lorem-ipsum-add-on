@@ -36,6 +36,8 @@
     "@react-spectrum/toast": "^3.0.0-beta.18",
     "@spectrum-icons/express": "^3.0.0-alpha.22",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "zod": "^3.24.2",
+    "zustand": "^5.0.3"
   }
 }
