@@ -25,12 +25,12 @@ export const manifest: PluginManifest = {
       documentSandbox: "code.js",
       permissions: {
         sandbox: [
-          "allow-popups",
-          "allow-popups-to-escape-sandbox",
-          "allow-presentation",
-          "allow-downloads",
+          // "allow-popups",
+          // "allow-popups-to-escape-sandbox",
+          // "allow-presentation",
+          // "allow-downloads",
         ],
-        oauth: ["*"],
+        // oauth: ["*"],
       },
     },
   ],

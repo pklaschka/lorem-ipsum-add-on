@@ -13,7 +13,7 @@ import { insertPlaceholderTextToAutoHeightTextNode } from "./placeholder-text/au
 
 export type FeedbackKey = keyof typeof feedback;
 
-console.log("Sandbox code is running nowww");
+// console.log("Sandbox code is running nowww");
 
 const sandboxApi = {
   insertPlaceholderText(
